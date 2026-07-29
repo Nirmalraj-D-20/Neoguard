@@ -10,6 +10,8 @@ const connectDB = require("./config/db");
 // 🔹 Routes
 const sensorRoutes = require("./routes/sensorRoutes");
 const trendRoutes = require("./routes/trendRoutes");
+const mlRoutes = require("./routes/mlRoutes");
+const analyticsRoutes = require("./routes/analyticsRoutes");
 
 // 🔹 Socket
 const { initSocket } = require("./config/socket");
@@ -45,6 +47,8 @@ app.get("/", (req, res) => {
 // 🔹 API Routes
 app.use("/api/sensor", sensorRoutes);
 app.use("/api/analytics", trendRoutes);
+app.use("/api/ml", mlRoutes);
+app.use("/api/analytics/summary", analyticsRoutes);
 
 // 🔹 404 Handler (must be AFTER routes)
 app.use((req, res) => {
