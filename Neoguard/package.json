@@ -1,0 +1,27 @@
+{
+  "name": "neoguard",
+  "version": "1.0.0",
+  "description": "IoT-based real-time health and environment monitoring system with alert dispatching",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^7.0.0",
+    "socket.io": "^4.6.1",
+    "twilio": "^4.0.0",
+    "node-telegram-bot-api": "^0.61.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}

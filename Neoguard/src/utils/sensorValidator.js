@@ -37,17 +37,22 @@ function validateSpO2(spo2) {
   return buildResponse(spo2, "NORMAL", SEVERITY.SAFE);
 }
 
-// 🌡️ ✅ UPDATED TEMPERATURE VALIDATION (FIXED)
+// 🌡️ Temperature Validation
 function validateTemperature(temp) {
-  // Accept realistic sensor range
+  // Accept realistic sensor range (0°C – 60°C)
   if (isInvalidNumber(temp) || temp < 0 || temp > 60) {
     return buildResponse(temp, "INVALID", SEVERITY.INVALID);
   }
 
-  if (temp < 18)
-    return buildResponse(temp, "COLD", SEVERITY.WARNING);
-
+  // Conditions must be ordered from lowest to highest to avoid
+  // unreachable branches (e.g. temp <= 10 was dead after temp < 18)
   if (temp <= 10)
+    return buildResponse(temp, "COLD", SEVERITY.CRITICAL);
+
+  if (temp < 18)
+    return buildResponse(temp, "COOL", SEVERITY.WARNING);
+
+  if (temp <= 37)
     return buildResponse(temp, "NORMAL", SEVERITY.SAFE);
 
   if (temp <= 38)
